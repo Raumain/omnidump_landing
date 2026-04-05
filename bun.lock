@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "omnidump_landing",
+      "name": "omnidump",
       "dependencies": {
         "@astrojs/sitemap": "^3.7.2",
         "@tailwindcss/vite": "^4.2.2",

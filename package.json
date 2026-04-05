@@ -1,5 +1,5 @@
 {
-  "name": "omnidump_landing",
+  "name": "omnidump",
   "version": "0.0.1",
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

@@ -1,8 +1,8 @@
 # robots.txt for OmniDump Landing Page
-# https://raumain.github.io/omnidump_landing
+# https://raumain.github.io/omnidump
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://raumain.github.io/omnidump_landing/sitemap-index.xml
+Sitemap: https://raumain.github.io/omnidump/sitemap-index.xml
