@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://raumain.github.io',
-  base: '/',
+  base: '/omnidump_landing',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
