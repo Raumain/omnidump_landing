@@ -1,0 +1,157 @@
+---
+/**
+ * JSON-LD Structured Data for SEO
+ * Includes: SoftwareApplication, Organization, WebSite, BreadcrumbList
+ */
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "OmniDump — Self-Hosted Database Operations Cockpit",
+  description = "Your self-hosted control panel for database dumps, schema exploration, and data imports. Manage Postgres, MySQL, and SQLite from one secure interface."
+} = Astro.props;
+
+const siteUrl = "https://raumain.github.io/omnidump_landing";
+const logoUrl = `${siteUrl}/omnidump_logo.svg`;
+const imageUrl = `${siteUrl}/og-image.png`;
+
+// SoftwareApplication Schema
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "OmniDump",
+  "alternateName": "OmniDump Database Operations Cockpit",
+  "description": description,
+  "url": siteUrl,
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Linux, macOS, Windows (via Docker)",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "raumain",
+    "url": "https://github.com/raumain"
+  },
+  "softwareVersion": "1.0",
+  "downloadUrl": "https://github.com/raumain/omnidump",
+  "installUrl": "https://github.com/raumain/omnidump",
+  "screenshot": imageUrl,
+  "featureList": [
+    "Multi-database support (PostgreSQL, MySQL, SQLite)",
+    "SQL dump and restore with native tools",
+    "CSV import with column mapping",
+    "SSH tunnel integration",
+    "Schema exploration and export",
+    "Self-hosted and Docker-ready"
+  ],
+  "softwareRequirements": "Docker or Docker Compose",
+  "keywords": "database, backup, dump, restore, postgres, mysql, sqlite, self-hosted, docker, csv import, schema explorer"
+};
+
+// Organization Schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "OmniDump",
+  "url": siteUrl,
+  "logo": logoUrl,
+  "sameAs": [
+    "https://github.com/raumain/omnidump"
+  ]
+};
+
+// WebSite Schema
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "OmniDump",
+  "url": siteUrl,
+  "description": description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "OmniDump"
+  }
+};
+
+// BreadcrumbList Schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    }
+  ]
+};
+
+// FAQPage Schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What databases does OmniDump support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "OmniDump is a self-hosted database tool that supports PostgreSQL, MySQL, and SQLite. Connection credentials are stored locally in your infrastructure, and you can test connections before saving. Switch between database servers instantly via the global connection selector."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is OmniDump self-hosted only?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. OmniDump is designed as a self-hosted database management tool that runs inside your infrastructure via Docker or Docker Compose. All data — credentials, SQL dumps, reject files — stays in your environment. There is no cloud-hosted version, ensuring complete data privacy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does SSH tunneling work for database connections?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When adding a database connection, you can configure SSH tunnel parameters (host, port, user, private key). OmniDump orchestrates the SSH tunnel with connection pooling and idle timeout. Your database port never needs public exposure, making it secure for production databases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to failed rows during CSV import?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "During CSV database import, rows that fail validation or insertion are captured in a reject file. After import completes, you can download the reject CSV to audit and fix the problematic rows. This ensures data integrity and easy error handling."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I create selective table dumps?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For PostgreSQL and MySQL databases, yes — select specific tables in the dump modal to create targeted SQL backups. SQLite currently performs a full database dump due to native tool limitations. Dumps are created using pg_dump and mysqldump for maximum compatibility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I restore a database from a SQL dump?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open the dumps drawer from the schema page. Select any saved SQL dump and click restore. The dump is applied using native database tools (psql for PostgreSQL, mysql CLI for MySQL, sqlite3 for SQLite) depending on your database type."
+      }
+    }
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(softwareApplicationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

@@ -1,0 +1,183 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
+  ? import.meta.env.BASE_URL 
+  : `${import.meta.env.BASE_URL}/`;
+
+const workflows = [
+  {
+    id: "connect",
+    label: "FLOW_A",
+    title: "Connect & Inspect",
+    steps: [
+      "Add database credentials (optionally with SSH tunnel config)",
+      "Test connection — includes tunnel-aware validation",
+      "Save connection and set as active",
+      "Explore schema: tables, columns, and metadata"
+    ],
+    placeholder: `${baseUrl}omnidump_index.png`,
+    placeholderAlt: "OmniDump connection manager interface showing saved PostgreSQL, MySQL, and SQLite databases with SSH tunnel configuration options"
+  },
+  {
+    id: "backup",
+    label: "FLOW_B",
+    title: "Backup & Restore",
+    steps: [
+      "Open dump modal from schema explorer",
+      "Select dump type and specific tables (Postgres/MySQL)",
+      "Save dump to local storage, optionally download immediately",
+      "Use dumps drawer to restore, download, or delete later"
+    ],
+    placeholder: `${baseUrl}omnidump_dump.png`,
+    placeholderAlt: "OmniDump SQL dump modal showing table selection for targeted database backup and export options"
+  },
+  {
+    id: "import",
+    label: "FLOW_C",
+    title: "CSV ETL",
+    steps: [
+      "Upload CSV file",
+      "Select target table from schema",
+      "Map CSV headers to database columns (auto-map assisted)",
+      "Import in batches with live progress events",
+      "Download reject CSV for any failed rows"
+    ],
+    placeholder: `${baseUrl}omnidump_csv.png`,
+    placeholderAlt: "OmniDump CSV import interface showing column mapping wizard and live progress streaming"
+  }
+];
+---
+
+<section id="workflow" class="px-4 py-16 md:py-24" aria-labelledby="workflow-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-12 text-center">
+      <span class="mb-4 inline-block font-mono text-xs uppercase tracking-widest text-terminal-accent">
+        OPERATION_SEQUENCES
+      </span>
+      <h2 id="workflow-heading" class="text-2xl font-bold uppercase tracking-tight text-terminal-text md:text-3xl">
+        Database Workflows
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-terminal-muted">
+        From connecting to your database to backing up and importing data — streamlined workflows for every database operation.
+      </p>
+    </div>
+
+    <div class="space-y-16 md:space-y-24">
+      {workflows.map((workflow, index) => (
+        <article class={`flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+          <div class="lg:w-1/2">
+            <div class="mb-4 flex items-center gap-3">
+              <span class="flex h-8 w-8 items-center justify-center border-2 border-terminal-accent bg-terminal-accent font-mono text-sm font-bold text-terminal-bg">
+                {index + 1}
+              </span>
+              <span class="font-mono text-xs uppercase tracking-wider text-terminal-muted">
+                {workflow.label}
+              </span>
+            </div>
+            
+            <h3 class="mb-6 text-xl font-bold uppercase text-terminal-text md:text-2xl">
+              {workflow.title}
+            </h3>
+            
+            <ol class="space-y-3">
+              {workflow.steps.map((step, stepIndex) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border border-terminal-border bg-terminal-surface font-mono text-xs text-terminal-muted">
+                    {stepIndex + 1}
+                  </span>
+                  <span class="text-sm text-terminal-muted">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div class="lg:w-1/2">
+            <button 
+              type="button"
+              class="workflow-image-container w-full shadow-hardware border-2 border-terminal-border bg-terminal-surface transition-all duration-300 ease-out hover:scale-110 hover:z-20 hover:shadow-2xl cursor-zoom-in"
+              data-lightbox-src={workflow.placeholder}
+              data-lightbox-alt={workflow.placeholderAlt}
+            >
+              <div class="border-b-2 border-terminal-border px-4 py-2">
+                <span class="font-mono text-xs text-terminal-muted">{workflow.label}_{workflow.id.toUpperCase()}</span>
+              </div>
+              <div class="aspect-video bg-terminal-bg p-2">
+                <img 
+                  src={workflow.placeholder}
+                  alt={workflow.placeholderAlt}
+                  class="h-full w-full object-cover"
+                  width="1721"
+                  height="1118"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Fullscreen Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm cursor-zoom-out" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button type="button" class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center border-2 border-terminal-border bg-terminal-surface text-terminal-text transition-colors hover:border-terminal-accent hover:text-terminal-accent" aria-label="Close">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] object-contain border-2 border-terminal-border shadow-2xl" />
+</div>
+
+<style>
+  .workflow-image-container {
+    position: relative;
+  }
+  
+  .workflow-image-container:hover {
+    position: relative;
+    z-index: 20;
+  }
+  
+  #lightbox.active {
+    display: flex;
+  }
+</style>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const closeBtn = lightbox?.querySelector('button');
+  
+  document.querySelectorAll('[data-lightbox-src]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = btn.getAttribute('data-lightbox-src');
+      const alt = btn.getAttribute('data-lightbox-alt') || '';
+      if (lightboxImg && lightbox && src) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+  
+  function closeLightbox() {
+    if (lightbox) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+  
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === closeBtn || closeBtn?.contains(e.target as Node)) {
+      closeLightbox();
+    }
+  });
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox?.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+</script>

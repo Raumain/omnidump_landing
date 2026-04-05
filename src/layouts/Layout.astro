@@ -1,0 +1,98 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  keywords?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
+  ? import.meta.env.BASE_URL 
+  : `${import.meta.env.BASE_URL}/`;
+
+const { 
+  title = "OmniDump — Self-Hosted Database Operations Cockpit",
+  description = "Your self-hosted control panel for database dumps, schema exploration, and data imports. Manage Postgres, MySQL, and SQLite from one secure interface. Open source, Docker-ready.",
+  image = `${baseUrl}og-image.png`,
+  keywords = "self-hosted database tool, database backup manager, SQL dump tool, postgres backup, mysql dump, sqlite tool, database schema explorer, CSV import database, docker database management, SSH tunnel database, database operations, developer tools"
+} = Astro.props;
+
+const siteName = "OmniDump";
+const author = "raumain";
+const twitterHandle = "@omnidump";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#F97316" />
+    <meta name="color-scheme" content="dark" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OmniDump - Self-Hosted Database Operations Cockpit" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:image:alt" content="OmniDump - Self-Hosted Database Operations Cockpit" />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}omnidump_logo.svg`} />
+    <link rel="icon" type="image/x-icon" href={`${baseUrl}favicon.ico`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl}apple-touch-icon.png`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${baseUrl}favicon-32x32.png`} />
+    <link rel="icon" type="image/png" sizes="16x16" href={`${baseUrl}favicon-16x16.png`} />
+    <link rel="manifest" href={`${baseUrl}site.webmanifest`} />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://github.com" />
+    
+    <!-- Mobile app capable -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content={siteName} />
+    <meta name="application-name" content={siteName} />
+  </head>
+  <body class="min-h-screen">
+    <slot />
+  </body>
+</html>
+
+<style>
+  @import "../styles/global.css";
+</style>

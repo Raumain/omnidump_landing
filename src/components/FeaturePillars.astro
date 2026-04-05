@@ -1,0 +1,63 @@
+---
+const features = [
+  {
+    label: "MULTI_DB_SUPPORT",
+    title: "Multi-Database Management",
+    description: "Connect to PostgreSQL, MySQL, and SQLite databases from a unified interface. Store credentials locally, test connections securely, and switch between database servers instantly with our self-hosted database tool.",
+    icon: "◈"
+  },
+  {
+    label: "DUMP_RESTORE",
+    title: "SQL Dump & Restore",
+    description: "Generate targeted SQL dumps using native tools like pg_dump and mysqldump. Select specific tables for PostgreSQL and MySQL backups. Restore database dumps on demand with one click.",
+    icon: "◉"
+  },
+  {
+    label: "CSV_IMPORT",
+    title: "CSV Import with Mapping",
+    description: "Import CSV files to your database with intelligent column mapping. Auto-map CSV headers to database schema, import in batches with live progress streaming, and download reject files for failed rows.",
+    icon: "◎"
+  },
+  {
+    label: "SSH_TUNNEL",
+    title: "SSH Tunnel Integration",
+    description: "Connect to protected databases through secure SSH tunnels without exposing database ports. Built-in tunnel orchestration with connection pooling and automatic idle timeout management.",
+    icon: "◍"
+  }
+];
+---
+
+<section class="border-y-2 border-terminal-border bg-terminal-surface px-4 py-16 md:py-24" aria-labelledby="features-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-12 text-center">
+      <span class="mb-4 inline-block font-mono text-xs uppercase tracking-widest text-terminal-accent">
+        CAPABILITY_MATRIX
+      </span>
+      <h2 id="features-heading" class="text-2xl font-bold uppercase tracking-tight text-terminal-text md:text-3xl">
+        Database Operations Features
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-terminal-muted">
+        Everything you need for database backup, restore, schema exploration, and data import in one self-hosted tool.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {features.map((feature) => (
+        <article class="shadow-hardware-sm border-2 border-terminal-border bg-terminal-bg p-6 transition-all hover:border-terminal-accent">
+          <div class="mb-4 flex items-center gap-3">
+            <span class="text-2xl text-terminal-accent">{feature.icon}</span>
+            <span class="font-mono text-xs uppercase tracking-wider text-terminal-muted">
+              {feature.label}
+            </span>
+          </div>
+          <h3 class="mb-3 text-lg font-bold text-terminal-text">
+            {feature.title}
+          </h3>
+          <p class="text-sm leading-relaxed text-terminal-muted">
+            {feature.description}
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

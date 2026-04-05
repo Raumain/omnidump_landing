@@ -1,0 +1,63 @@
+---
+const faqs = [
+  {
+    question: "What databases does OmniDump support?",
+    answer: "OmniDump is a self-hosted database tool that supports PostgreSQL, MySQL, and SQLite. Connection credentials are stored locally in your infrastructure, and you can test connections before saving. Switch between database servers instantly via the global connection selector."
+  },
+  {
+    question: "Is OmniDump self-hosted only?",
+    answer: "Yes. OmniDump is designed as a self-hosted database management tool that runs inside your infrastructure via Docker or Docker Compose. All data — credentials, SQL dumps, reject files — stays in your environment. There is no cloud-hosted version, ensuring complete data privacy."
+  },
+  {
+    question: "How does SSH tunneling work for database connections?",
+    answer: "When adding a database connection, you can configure SSH tunnel parameters (host, port, user, private key). OmniDump orchestrates the SSH tunnel with connection pooling and idle timeout. Your database port never needs public exposure, making it secure for production databases."
+  },
+  {
+    question: "What happens to failed rows during CSV import?",
+    answer: "During CSV database import, rows that fail validation or insertion are captured in a reject file. After import completes, you can download the reject CSV to audit and fix the problematic rows. This ensures data integrity and easy error handling."
+  },
+  {
+    question: "Can I create selective table dumps?",
+    answer: "For PostgreSQL and MySQL databases, yes — select specific tables in the dump modal to create targeted SQL backups. SQLite currently performs a full database dump due to native tool limitations. Dumps are created using pg_dump and mysqldump for maximum compatibility."
+  },
+  {
+    question: "How do I restore a database from a SQL dump?",
+    answer: "Open the dumps drawer from the schema page. Select any saved SQL dump and click restore. The dump is applied using native database tools (psql for PostgreSQL, mysql CLI for MySQL, sqlite3 for SQLite) depending on your database type."
+  }
+];
+---
+
+<section class="px-4 py-16 md:py-24" aria-labelledby="faq-heading">
+  <div class="mx-auto max-w-3xl">
+    <div class="mb-12 text-center">
+      <span class="mb-4 inline-block font-mono text-xs uppercase tracking-widest text-terminal-accent">
+        QUERY_INDEX
+      </span>
+      <h2 id="faq-heading" class="text-2xl font-bold uppercase tracking-tight text-terminal-text md:text-3xl">
+        Database Tool FAQ
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-terminal-muted">
+        Common questions about OmniDump's database backup, restore, and import capabilities.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details class="group border-2 border-terminal-border bg-terminal-surface">
+          <summary class="flex cursor-pointer items-center justify-between p-4 font-mono text-sm uppercase tracking-wide text-terminal-text hover:bg-terminal-bg">
+            <span class="flex items-center gap-3">
+              <span class="text-terminal-muted">[{String(index + 1).padStart(2, '0')}]</span>
+              {faq.question}
+            </span>
+            <span class="text-terminal-accent transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="border-t-2 border-terminal-border bg-terminal-bg p-4">
+            <p class="text-sm leading-relaxed text-terminal-muted">
+              {faq.answer}
+            </p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

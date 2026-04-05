@@ -1,0 +1,66 @@
+---
+const trustSignals = [
+  {
+    icon: "⬡",
+    title: "Self-Hosted Architecture",
+    description: "Your data stays in your infrastructure. Credentials and dumps are stored locally in the app volume — nothing leaves your environment."
+  },
+  {
+    icon: "⬢",
+    title: "Local Persistence",
+    description: "Connection metadata lives in an app-local SQLite database. Dumps and reject files are written to mounted storage you control."
+  },
+  {
+    icon: "◈",
+    title: "SSH Tunnel Support",
+    description: "Connect to protected databases without exposing ports. Built-in tunnel orchestration with idle timeout and connection pooling."
+  },
+  {
+    icon: "◇",
+    title: "Explicit Error Surfacing",
+    description: "Server paths surface errors explicitly. Path validation on download and delete endpoints prevents traversal attacks."
+  },
+  {
+    icon: "□",
+    title: "Native DB Tooling",
+    description: "Runtime image includes pg_dump, mysqldump, sqlite3, and openssh-client. No third-party dump services — native tools only."
+  },
+  {
+    icon: "○",
+    title: "Docker-First Deployment",
+    description: "Multi-stage Docker build with runtime healthcheck. Compose examples included for production and local sandboxing."
+  }
+];
+---
+
+<section class="border-y-2 border-terminal-border bg-terminal-surface px-4 py-16 md:py-24" aria-labelledby="security-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-12 text-center">
+      <span class="mb-4 inline-block font-mono text-xs uppercase tracking-widest text-terminal-accent">
+        TRUST_SIGNALS
+      </span>
+      <h2 id="security-heading" class="text-2xl font-bold uppercase tracking-tight text-terminal-text md:text-3xl">
+        Self-Hosted Security & Privacy
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-terminal-muted">
+        OmniDump is a fully self-hosted database tool that runs inside your infrastructure. No external services, no telemetry, no credential transmission to third parties.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {trustSignals.map((signal) => (
+        <article class="border-2 border-terminal-border bg-terminal-bg p-6">
+          <div class="mb-4 flex items-center gap-3">
+            <span class="text-xl text-terminal-cyan">{signal.icon}</span>
+            <h3 class="font-bold uppercase text-terminal-text">
+              {signal.title}
+            </h3>
+          </div>
+          <p class="text-sm leading-relaxed text-terminal-muted">
+            {signal.description}
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

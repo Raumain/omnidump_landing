@@ -1,0 +1,36 @@
+{
+  "name": "OmniDump",
+  "short_name": "OmniDump",
+  "description": "Self-hosted database operations cockpit. Manage Postgres, MySQL, and SQLite dumps, schema, and CSV imports.",
+  "start_url": "/omnidump_landing/",
+  "scope": "/omnidump_landing/",
+  "display": "standalone",
+  "background_color": "#1C1C1E",
+  "theme_color": "#F97316",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/omnidump_landing/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/omnidump_landing/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/omnidump_landing/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/omnidump_landing/omnidump_logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["developer tools", "utilities", "productivity"],
+  "lang": "en"
+}

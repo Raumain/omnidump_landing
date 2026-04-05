@@ -1,17 +1,22 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import StructuredData from '../components/StructuredData.astro';
+import Hero from '../components/Hero.astro';
+import FeaturePillars from '../components/FeaturePillars.astro';
+import Workflow from '../components/Workflow.astro';
+import Security from '../components/Security.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <StructuredData />
+  <main>
+    <Hero />
+    <FeaturePillars />
+    <Workflow />
+    <Security />
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>

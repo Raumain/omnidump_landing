@@ -1,0 +1,36 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t-2 border-terminal-border bg-terminal-surface px-4 py-8">
+  <div class="mx-auto max-w-6xl">
+    <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+      <div class="flex items-center gap-4">
+        <span class="font-mono text-lg font-bold uppercase tracking-wider text-terminal-text">
+          OmniDump
+        </span>
+        <span class="font-mono text-xs text-terminal-muted">
+          Self-Hosted • Open Source
+        </span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a 
+          href="https://github.com/raumain/omnidump"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-sm uppercase tracking-wide text-terminal-muted transition-colors hover:text-terminal-accent"
+        >
+          GitHub →
+        </a>
+
+      </div>
+    </div>
+
+    <div class="mt-6 border-t border-terminal-border pt-6 text-center">
+      <p class="font-mono text-xs text-terminal-muted">
+        © {currentYear} OmniDump. Database operations cockpit.
+      </p>
+    </div>
+  </div>
+</footer>

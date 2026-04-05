@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Tactile Hardware palette - matching OmniDump app (Teenage Engineering OP-1/TX-6 inspired) */
+  --color-terminal-bg: #1C1C1E;
+  --color-terminal-surface: #2C2C2E;
+  --color-terminal-border: #3F3F46;
+  --color-terminal-text: #F3F4F6;
+  --color-terminal-muted: #9CA3AF;
+  --color-terminal-accent: #F97316;
+  --color-terminal-accent-hover: #FB923C;
+  --color-terminal-blue: #3B82F6;
+  --color-terminal-green: #22C55E;
+  --color-terminal-red: #EF4444;
+  --color-terminal-yellow: #EAB308;
+
+  /* Custom shadows for tactile/hardware feel - dark grey for premium matte look */
+  --shadow-hardware: 3px 3px 0px 0px #111111;
+  --shadow-hardware-sm: 2px 2px 0px 0px #111111;
+  --shadow-hardware-lg: 4px 4px 0px 0px #111111;
+  --shadow-hardware-accent: 3px 3px 0px 0px #111111;
+
+  /* Fonts */
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Base styles */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-terminal-bg text-terminal-text antialiased;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    position: relative;
+  }
+
+  /* Animated dot grid background - subtle "powered on" state */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle, #3F3F46 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 60s linear infinite;
+  }
+
+  @keyframes drift {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(-24px, -24px);
+    }
+  }
+
+  ::selection {
+    @apply bg-terminal-accent text-terminal-bg;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  .shadow-hardware {
+    box-shadow: var(--shadow-hardware);
+  }
+
+  .shadow-hardware-sm {
+    box-shadow: var(--shadow-hardware-sm);
+  }
+
+  .shadow-hardware-lg {
+    box-shadow: var(--shadow-hardware-lg);
+  }
+
+  .shadow-hardware-accent {
+    box-shadow: var(--shadow-hardware-accent);
+  }
+}
