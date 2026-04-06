@@ -21,8 +21,8 @@ const faqs = [
     answer: "For PostgreSQL and MySQL databases, yes — select specific tables in the dump modal to create targeted SQL backups. SQLite currently performs a full database dump due to native tool limitations. Dumps are created using pg_dump and mysqldump for maximum compatibility."
   },
   {
-    question: "How do I restore a database from a SQL dump?",
-    answer: "Open the dumps drawer from the schema page. Select any saved SQL dump and click restore. The dump is applied using native database tools (psql for PostgreSQL, mysql CLI for MySQL, sqlite3 for SQLite) depending on your database type."
+    question: "Can I browse or query my data in OmniDump?",
+    answer: "No — OmniDump is a database operations tool, not a data browser. It handles backups, restores, and CSV imports, but it's not designed to replace tools like pgAdmin, DBeaver, or TablePlus for querying and viewing your data. Use OmniDump alongside your preferred database client."
   }
 ];
 ---
